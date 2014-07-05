@@ -1,6 +1,12 @@
-# BootstrapForm::Datetimepicker
+# Datetime Picker with Rails Bootstrap Forms
 
-TODO: Write a gem description
+Add on for [bootstra@_form](http://rubygems.org/gems/bootstrap_form) to embed [bootstrap-datetimepicker](http://eonasdan.github.io/bootstrap-datetimepicker/) simply.
+
+## Requirements
+
+* Ruby 2.1+
+* Rails 4.1+
+* Twitter Bootstrap 3.0+
 
 ## Installation
 
@@ -18,11 +24,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Call `datetime_picker` within `bootstrap_form_for`:
+
+```erb
+<%= bootstrap_form_for(@item) do |f| %>
+  <%= f.datetime_picker :available_since %>
+<% end %>
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/bootstrap_form-datetimepicker/fork )
+1. Fork it ( https://github.com/a2ikm/bootstrap_form-datetimepicker/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
