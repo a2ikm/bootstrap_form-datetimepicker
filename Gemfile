@@ -1,4 +1,7 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-# Specify your gem's dependencies in bootstrap_form-datetimepicker.gemspec
 gemspec
+
+gem "rails", ">= 4.1.0"
+gem "rspec-rails"
+gem "sqlite3"
