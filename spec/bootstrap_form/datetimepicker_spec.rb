@@ -59,4 +59,23 @@ describe BootstrapForm::Datetimepicker do
 
     expect(horizontal_builder.datetime_picker(:until, :datetimepicker_class => "custom-datetimepicker-class")).to eq expected
   end
+
+  it "should render with initial value" do
+    @schedule.until = Time.now
+
+    expected = <<-HTML.gsub(/ *\n */, "")
+<div class="form-group">
+  <label class="control-label" for="schedule_until">Until</label>
+  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+    <input class="form-control" id="schedule_until" name="schedule[until]" type="text" value="#{@schedule.until.to_s}" />
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar">
+      </span>
+    </span>
+  </div>
+</div>
+    HTML
+
+    expect(builder.datetime_picker(:until)).to eq expected
+  end
 end
