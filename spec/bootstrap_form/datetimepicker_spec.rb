@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe BootstrapForm::Datetimepicker do
-  let(:schedule) { Schedule.new }
-  let(:builder) { BootstrapForm::FormBuilder.new(:schedule, schedule, self, {}) }
-  let(:horizontal_builder) { BootstrapForm::FormBuilder.new(:schedule, schedule, self, { layout: :horizontal }) }
+  before { @schedule = Schedule.new }
+  let(:builder) { BootstrapForm::FormBuilder.new(:schedule, @schedule, self, {}) }
+  let(:horizontal_builder) { BootstrapForm::FormBuilder.new(:schedule, @schedule, self, { layout: :horizontal }) }
 
   it "should render datetimepicker correctly in normal layout" do
     expected = <<-HTML.gsub(/ *\n */, "")
