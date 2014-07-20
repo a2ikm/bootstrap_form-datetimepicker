@@ -17,4 +17,6 @@ RSpec.configure do |config|
   config.before :each do
     Schedule.delete_all
   end
+
+  config.include ActionView::TestCase::Behavior
 end
