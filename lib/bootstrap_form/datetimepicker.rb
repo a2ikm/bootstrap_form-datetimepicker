@@ -33,7 +33,7 @@ module BootstrapForm
         options[:value] = initial_value.to_s(format_name)
       end
 
-      date_format = "YYYY-MM-DD HH:mm:ss"
+      date_format = "YYYY-MM-DD HH:mm:ss ZZ"
       if format_name &&
          (format = Time::DATE_FORMATS[format_name]) &&
          format.is_a?(String)

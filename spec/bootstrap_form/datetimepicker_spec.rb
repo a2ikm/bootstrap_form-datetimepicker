@@ -9,7 +9,7 @@ describe BootstrapForm::Datetimepicker do
     expected = <<-HTML.gsub(/ *\n */, "")
 <div class="form-group">
   <label class="control-label" for="schedule_until">Until</label>
-  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss ZZ">
     <input class="form-control" id="schedule_until" name="schedule[until]" type="text" />
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-calendar">
@@ -27,7 +27,7 @@ describe BootstrapForm::Datetimepicker do
 <div class="form-group">
   <label class="control-label col-sm-2" for="schedule_until">Until</label>
   <div class="col-sm-10">
-    <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+    <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss ZZ">
       <input class="form-control" id="schedule_until" name="schedule[until]" type="text" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar">
@@ -46,7 +46,7 @@ describe BootstrapForm::Datetimepicker do
 <div class="form-group">
   <label class="control-label col-sm-2" for="schedule_until">Until</label>
   <div class="col-sm-10">
-    <div class="custom-datetimepicker-class input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+    <div class="custom-datetimepicker-class input-group date" data-date-format="YYYY-MM-DD HH:mm:ss ZZ">
       <input class="form-control" id="schedule_until" name="schedule[until]" type="text" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar">
@@ -66,7 +66,7 @@ describe BootstrapForm::Datetimepicker do
     expected = <<-HTML.gsub(/ *\n */, "")
 <div class="form-group">
   <label class="control-label" for="schedule_until">Until</label>
-  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD HH:mm:ss ZZ">
     <input class="form-control" id="schedule_until" name="schedule[until]" type="text" value="#{@schedule.until.to_s}" />
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-calendar">
