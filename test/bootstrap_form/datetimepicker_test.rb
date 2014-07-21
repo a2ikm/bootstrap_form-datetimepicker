@@ -1,11 +1,16 @@
-require "spec_helper"
+require "test_helper"
 
-describe BootstrapForm::Datetimepicker do
-  before { @schedule = Schedule.new }
-  let(:builder) { BootstrapForm::FormBuilder.new(:schedule, @schedule, self, {}) }
-  let(:horizontal_builder) { BootstrapForm::FormBuilder.new(:schedule, @schedule, self, { layout: :horizontal }) }
+class BootstrapFromDatetimepickerTest < ActionView::TestCase
+  def setup
+    CreateAllTables.up unless ActiveRecord::Base.connection.table_exists? "schedules"
+    Schedule.delete_all
 
-  it "should render datetimepicker correctly in normal layout" do
+    @schedule = Schedule.new
+    @builder =  BootstrapForm::FormBuilder.new(:schedule, @schedule, self, {})
+    @horizontal_builder = BootstrapForm::FormBuilder.new(:schedule, @schedule, self, { layout: :horizontal })
+  end
+
+  test "render datetimepicker correctly in normal layout" do
     expected = <<-HTML.gsub(/ *\n */, "")
 <div class="form-group">
   <label class="control-label" for="schedule_until">Until</label>
@@ -19,10 +24,10 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(builder.datetime_picker(:until)).to eq expected
+    assert_equal expected, @builder.datetime_picker(:until)
   end
 
-  it "should render datetimepicker correctly in horizontal layout" do
+  test "render datetimepicker correctly in horizontal layout" do
     expected = <<-HTML.gsub(/ *\n */, "")
 <div class="form-group">
   <label class="control-label col-sm-2" for="schedule_until">Until</label>
@@ -38,10 +43,10 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(horizontal_builder.datetime_picker(:until)).to eq expected
+    assert_equal expected, @horizontal_builder.datetime_picker(:until)
   end
 
-  it "should render wrapping div with datetimepicker_class option" do
+  test "use :datetimepicker_class option for wrapping div element's class" do
     expected = <<-HTML.gsub(/ *\n */, "")
 <div class="form-group">
   <label class="control-label col-sm-2" for="schedule_until">Until</label>
@@ -57,10 +62,10 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(horizontal_builder.datetime_picker(:until, :datetimepicker_class => "custom-datetimepicker-class")).to eq expected
+    assert_equal expected, @horizontal_builder.datetime_picker(:until, :datetimepicker_class => "custom-datetimepicker-class")
   end
 
-  it "should render with initial value" do
+  test "put object's value for value attribute" do
     @schedule.until = Time.now
 
     expected = <<-HTML.gsub(/ *\n */, "")
@@ -76,10 +81,10 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(builder.datetime_picker(:until)).to eq expected
+    assert_equal expected, @builder.datetime_picker(:until)
   end
 
-  it "should put value and data-date-format attributes in format whose name is specified with format option" do
+  test "use Time::DATE_FORMATS' format for value attribute and data-date-format attribute when :format option is specified by its name" do
     @schedule.until = Time.now
     Time::DATE_FORMATS[:custom] = "%Y-%m-%d"
 
@@ -96,10 +101,10 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(builder.datetime_picker(:until, :format => :custom)).to eq expected
+    assert_equal expected, @builder.datetime_picker(:until, :format => :custom)
   end
 
-  it "should put value and data-date-format attributes in format specified with format option" do
+  test "use format specified with :format option for value attribute and data-date-format attribute" do
     @schedule.until = Time.now
 
     expected = <<-HTML.gsub(/ *\n */, "")
@@ -115,10 +120,10 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(builder.datetime_picker(:until, :format => "%Y-%m-%d")).to eq expected
+    assert_equal expected, @builder.datetime_picker(:until, :format => "%Y-%m-%d")
   end
 
-  it "should put data-date-format attributes specified with datetimepicker_format option, and use format option only for value attribute" do
+  test "use :datetimepicker_format option for data-date-format attribute" do
     @schedule.until = Time.now
 
     expected = <<-HTML.gsub(/ *\n */, "")
@@ -134,6 +139,6 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(builder.datetime_picker(:until, :format => "%Y-%m-%d", :datetimepicker_format => "YYYY-MMMM-DDDD")).to eq expected
+    assert_equal expected, @builder.datetime_picker(:until, :format => "%Y-%m-%d", :datetimepicker_format => "YYYY-MMMM-DDDD")
   end
 end

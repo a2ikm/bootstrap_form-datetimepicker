@@ -35,6 +35,8 @@ end
 # migrations
 class CreateAllTables < ActiveRecord::Migration
   def self.up
-    create_table(:schedules) { |t| t.datetime :until }
+    suppress_messages do
+      create_table(:schedules) { |t| t.datetime :until }
+    end
   end
 end
