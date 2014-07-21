@@ -1,6 +1,6 @@
 # Datetime Picker with Rails Bootstrap Forms
 
-Add on for [bootstrap_form](http://rubygems.org/gems/bootstrap_form) to embed [bootstrap-datetimepicker](http://eonasdan.github.io/bootstrap-datetimepicker/) simply.
+[bootstrap_form](http://rubygems.org/gems/bootstrap_form) add-on to embed [bootstrap-datetimepicker](http://eonasdan.github.io/bootstrap-datetimepicker/) simply.
 
 ## Requirements
 
