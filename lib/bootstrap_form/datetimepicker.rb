@@ -44,9 +44,13 @@ module BootstrapForm
         options[:value] = initial_value
       end
 
-      date_format = "YYYY-MM-DD HH:mm:ss ZZ"
-      if format.is_a?(String)
-        date_format = strftime2momentjs(format)
+      datetimepicker_format = options.delete(:datetimepicker_format)
+      if datetimepicker_format
+        # do nothing
+      elsif format.is_a?(String)
+        datetimepicker_format = strftime2momentjs(format)
+      else
+        datetimepicker_format = "YYYY-MM-DD HH:mm:ss ZZ"
       end
 
       form_group_builder(method, options) do
@@ -59,7 +63,7 @@ module BootstrapForm
           content_tag :div, input_tag.concat(span_tag),
             :class => "#{datetimepicker_class} input-group date",
             :data => {
-              "date-format" => date_format
+              "date-format" => datetimepicker_format
             }
         end
       end
