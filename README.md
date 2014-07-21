@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/a2ikm/bootstrap_form-datetimepicker.svg?branch=master)](https://travis-ci.org/a2ikm/bootstrap_form-datetimepicker)
 
-# Datetime Picker with Rails Bootstrap Forms
+# Datetime Picker for Rails Bootstrap Forms
 
-[bootstrap_form](http://rubygems.org/gems/bootstrap_form) add-on to embed [bootstrap-datetimepicker](http://eonasdan.github.io/bootstrap-datetimepicker/) simply.
+bootstrap_form-datetimepicker is [bootstrap_form](http://rubygems.org/gems/bootstrap_form) add-on to embed [bootstrap-datetimepicker](http://eonasdan.github.io/bootstrap-datetimepicker/) simply.
 
 ## Requirements
 
