@@ -19,6 +19,7 @@ module BootstrapForm
       "p" => "A",
       "S" => "ss",
       "Z" => "z",
+      "z" => "ZZ",
       "w" => "d",
       "y" => "YY",
       "Y" => "YYYY",
@@ -26,17 +27,25 @@ module BootstrapForm
 
     def datetime_picker(method, options = {})
       datetimepicker_class = options.delete(:datetimepicker_class) || "bootstrap_form-datetimepicker" 
-      format_name = options.delete(:format_name) || nil
+
+      format = options.delete(:format)
+      if format
+        format = Time::DATE_FORMATS[format] if Time::DATE_FORMATS.has_key?(format)
+      else
+        format = "%Y-%m-%d %H:%M:%S %z"
+      end
 
       initial_value = object.send(method)
-      if initial_value.try(:acts_like_time?)
-        options[:value] = initial_value.to_s(format_name)
+      if format.respond_to?(:call)
+        options[:value] = format.call(initial_value)
+      elsif initial_value.try(:acts_like_time?)
+        options[:value] = initial_value.strftime(format)
+      else
+        options[:value] = initial_value
       end
 
       date_format = "YYYY-MM-DD HH:mm:ss ZZ"
-      if format_name &&
-         (format = Time::DATE_FORMATS[format_name]) &&
-         format.is_a?(String)
+      if format.is_a?(String)
         date_format = strftime2momentjs(format)
       end
 

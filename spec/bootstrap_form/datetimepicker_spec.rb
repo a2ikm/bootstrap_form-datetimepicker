@@ -79,7 +79,7 @@ describe BootstrapForm::Datetimepicker do
     expect(builder.datetime_picker(:until)).to eq expected
   end
 
-  it "should put value and data-date-format attributes in format specified with format_name option" do
+  it "should put value and data-date-format attributes in format whose name is specified with format option" do
     @schedule.until = Time.now
     Time::DATE_FORMATS[:custom] = "%Y-%m-%d"
 
@@ -96,6 +96,25 @@ describe BootstrapForm::Datetimepicker do
 </div>
     HTML
 
-    expect(builder.datetime_picker(:until, :format_name => :custom)).to eq expected
+    expect(builder.datetime_picker(:until, :format => :custom)).to eq expected
+  end
+
+  it "should put value and data-date-format attributes in format specified with format option" do
+    @schedule.until = Time.now
+
+    expected = <<-HTML.gsub(/ *\n */, "")
+<div class="form-group">
+  <label class="control-label" for="schedule_until">Until</label>
+  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD">
+    <input class="form-control" id="schedule_until" name="schedule[until]" type="text" value="#{@schedule.until.strftime("%Y-%m-%d")}" />
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar">
+      </span>
+    </span>
+  </div>
+</div>
+    HTML
+
+    expect(builder.datetime_picker(:until, :format => "%Y-%m-%d")).to eq expected
   end
 end
