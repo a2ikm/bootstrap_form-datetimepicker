@@ -141,4 +141,48 @@ class BootstrapFromDatetimepickerTest < ActionView::TestCase
 
     assert_equal expected, @builder.datetime_picker(:until, :format => "%Y-%m-%d", :datetimepicker_format => "YYYY-MMMM-DDDD")
   end
+
+  test "configure global :format" do
+    old_config = ::BootstrapForm::Datetimepicker.format
+    ::BootstrapForm::Datetimepicker.format = "%Y-%m-%d"
+
+    expected = <<-HTML.gsub(/ *\n */, "")
+<div class="form-group">
+  <label class="control-label" for="schedule_until">Until</label>
+  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD">
+    <input class="form-control" id="schedule_until" name="schedule[until]" type="text" />
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar">
+      </span>
+    </span>
+  </div>
+</div>
+    HTML
+
+    assert_equal expected, @builder.datetime_picker(:until)
+
+    ::BootstrapForm::Datetimepicker.format = old_config
+  end
+
+  test "configure global :datetimepicker_format" do
+    old_config = ::BootstrapForm::Datetimepicker.datetimepicker_format
+    ::BootstrapForm::Datetimepicker.datetimepicker_format = "YYYY-MM-DD"
+
+    expected = <<-HTML.gsub(/ *\n */, "")
+<div class="form-group">
+  <label class="control-label" for="schedule_until">Until</label>
+  <div class="bootstrap_form-datetimepicker input-group date" data-date-format="YYYY-MM-DD">
+    <input class="form-control" id="schedule_until" name="schedule[until]" type="text" />
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar">
+      </span>
+    </span>
+  </div>
+</div>
+    HTML
+
+    assert_equal expected, @builder.datetime_picker(:until)
+
+    ::BootstrapForm::Datetimepicker.datetimepicker_format = old_config
+  end
 end

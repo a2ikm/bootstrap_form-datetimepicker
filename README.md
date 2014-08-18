@@ -51,7 +51,7 @@ will produce HTML like:
 </div>
 ```
 
-Note that `bootstrap_form-datetimepicker` class is used for wrapping div element. So You should initialize widget like:
+Note that `bootstrap_form-datetimepicker` class is used for wrapping div element. So you should initialize widgets like:
 
 ```javascript
 $(function () {
@@ -84,6 +84,13 @@ or format's name defined in `Time::DATE_FORMATS` like:
 <%= bootstrap_form_for(@item) do |f| %>
   <%= f.datetime_picker :available_since, format: :db %>
 <% end %>
+```
+
+Also you can these globally like:
+
+```
+BootstrapForm::Datetimepicker.format = "%Y-%m-%d %H:%M:%S"
+BootstrapForm::Datetimepicker.datetimepicker_format = "YYYY-MM-SS HH:mm:ss"
 ```
 
 bootstrap-datetimepicker formats datetime with [momentjs](http://momentjs.com), whose [its formating syntax](http://momentjs.com/docs/#/parsing/string-format/) differs from ruby's that. So this gem converts between them automatically, but in some cases, it can't (using `proc`, `%e`, etc). At that time, you should specify bootstrap-datetimepicker's format with `:datetimepicker_format` option like:

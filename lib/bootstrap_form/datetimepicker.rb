@@ -5,6 +5,7 @@ require "active_support/core_ext/time"
 
 module BootstrapForm
   module Datetimepicker
+
     STRFTIME_MOMENTJS = {
       "a" => "ddd",
       "A" => "dddd",
@@ -28,7 +29,7 @@ module BootstrapForm
     def datetime_picker(method, options = {})
       datetimepicker_class = options.delete(:datetimepicker_class) || "bootstrap_form-datetimepicker" 
 
-      format = options.delete(:format)
+      format = options.delete(:format) || config.format
       if format
         format = Time::DATE_FORMATS[format] if Time::DATE_FORMATS.has_key?(format)
       else
@@ -44,7 +45,8 @@ module BootstrapForm
         options[:value] = initial_value
       end
 
-      datetimepicker_format = options.delete(:datetimepicker_format)
+      datetimepicker_format =
+        options.delete(:datetimepicker_format) || config.datetimepicker_format
       if datetimepicker_format
         # do nothing
       elsif format.is_a?(String)
@@ -67,6 +69,14 @@ module BootstrapForm
             }
         end
       end
+    end
+
+    def config
+      ::BootstrapForm::Datetimepicker
+    end
+
+    class <<self
+      attr_accessor :format, :datetimepicker_format
     end
 
     private
